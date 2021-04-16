@@ -1,7 +1,8 @@
 <template>
   <div>
     <div class="explanation">
-      <p>Krijo një repository në <a href="https://github.com/division5">Division5 Github</a> me titullin <b><i>emer_mbiemer</i></b>.</p>
+      <p>Krijo një repository në <a href="https://github.com/division5">Division5 Github</a> me titullin <b><i>emer_mbiemer</i></b>.
+      </p>
       <p>Në momentin që ke përfunduar bëj <b>commit & push</b>.</p>
       <p>Pikët do të llogariten në bazë të <b>kohës</b>, <b>saktësisë</b> & <b>kompleksitetit të kohës (Big O)</b>.</p>
       <p>______</p>
@@ -76,32 +77,49 @@ export default {
 
   methods: {
     onCheck() {
-      if (this.$refs.testEditor._data.error || this.$refs.solutionEditor._data.error) {
-        alert('Invalid JSON');
-      } else {
-        let idx = 0;
-        this.solution.forEach(solution => {
-          console.log('\nSolution' + (idx + 1));
-          if (solution !== 'E PAMUNDUR') {
-            solution.forEach(row => console.log(row));
-            console.log(
-                'Solution L === Test L: ',
-                this.test[idx]['L'] === solution[0].reduce((a, b) => a + b, 0),
-            );
+      try {
+        if (this.$refs.testEditor._data.error || this.$refs.solutionEditor._data.error) {
+          alert('Invalid JSON');
+        } else {
+          let idx = 0;
+          let alertMsg = [];
+          this.solution.forEach(solution => {
+            console.log('\nSolution' + (idx + 1));
+            if (solution !== 'E PAMUNDUR') {
+              solution.forEach(row => console.log(row));
+              console.log(
+                  'Solution L === Test L: ',
+                  this.test[idx]['L'] === solution[0].reduce((a, b) => a + b, 0),
+              );
 
-            console.log(
-                'Solution P === Test P: ',
-                this.test[idx]['P'] === solution[1].reduce((a, b) => a + b, 0),
-            );
-            const column_sums = solution.reduce((a, b) => a.map((x, i) => x + (b[i] || 0)));
-            const sums_match = JSON.stringify(this.test[idx]['C']) === JSON.stringify(column_sums);
-            console.log('Solution Column Sums === Test Column Sums: ', sums_match,
-                '\nC :', column_sums, '\nC :', this.test[idx]['C']);
-          } else {
-            console.log(solution);
-          }
-          idx++;
-        });
+              console.log(
+                  'Solution P === Test P: ',
+                  this.test[idx]['P'] === solution[1].reduce((a, b) => a + b, 0),
+              );
+              const column_sums = solution.reduce((a, b) => a.map((x, i) => x + (b[i] || 0)));
+              const sums_match = JSON.stringify(this.test[idx]['C']) === JSON.stringify(column_sums);
+              console.log('Solution Column Sums === Test Column Sums: ', sums_match,
+                  '\nC :', column_sums, '\nC :', this.test[idx]['C']);
+
+              alertMsg.push(
+                  (idx + 1) + '. ' +
+                  (
+                      this.test[idx]['L'] === solution[0].reduce((a, b) => a + b, 0) &&
+                      this.test[idx]['P'] === solution[1].reduce((a, b) => a + b, 0) &&
+                      sums_match
+                  )
+              );
+            } else {
+              console.log(solution);
+              alert((idx + 1) + '. ' + solution);
+            }
+            idx++;
+          });
+          alert('Per me shume hollesi hapni Console\n\n' +
+              alertMsg.join('\n'));
+        }
+      } catch (e) {
+        alert('Gjatesite e JSONArray nuk perputhen');
       }
     }
   }
