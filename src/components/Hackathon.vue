@@ -28,7 +28,7 @@
       <p> - çdo element i matricës<i>(array)</i> <b>C</b> është një <b>integer</b> me vlerën <b><i>0, 1 ose 2</i></b>.
       </p>
       <p>______</p>
-      <p style="color: gray"><b>Në dritaret e mëposhtme janë dhënë dy shembuj.</b></p>
+      <p style="color: gray"><b>Në dritaret e mëposhtme janë dhënë 7 teste dhe në krah 7 zgjidhjet përkatëse.</b></p>
       <b style="color: grey"><i>* Duke klikuar 'Check' mund të kontrolloni rezultatin në Console.</i></b>
     </div>
     <div class="jsons-container">
