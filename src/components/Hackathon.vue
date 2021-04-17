@@ -58,16 +58,56 @@ export default {
           'L': 3,
           'P': 2,
           'C': [2, 1, 1, 0, 1]
-        },
-        {
+        }, {
+          'L': 5,
+          'P': 6,
+          'C': [2, 1, 2, 2, 2, 2]
+        }, {
           'L': 2,
           'P': 2,
           'C': [2, 0, 2, 0]
+        }, {
+          'L': 2,
+          'P': 2,
+          'C': [2, 2]
+        }, {
+          'L': 0,
+          'P': 0,
+          'C': [0, 0, 0]
+        }, {
+          'L': 2,
+          'P': 3,
+          'C': [0, 0, 1, 1, 2]
+        }, {
+          'L': 5,
+          'P': 6,
+          'C': [2, 0, 2, 2, 2, 2]
         }
       ],
       solution: [
-        [[1, 1, 0, 0, 1], [1, 0, 1, 0, 0]],
-        [[1, 0, 1, 0], [1, 0, 1, 0]]
+        [
+          [1, 1, 0, 0, 1],
+          [1, 0, 1, 0, 0]
+        ],
+        [
+          [1, 0, 1, 1, 1, 1],
+          [1, 1, 1, 1, 1, 1]
+        ],
+        [
+          [1, 0, 1, 0],
+          [1, 0, 1, 0]
+        ],
+        [
+          [1, 1],
+          [1, 1]
+        ],
+        [
+          [0, 0, 0],
+          [0, 0, 0]
+        ],
+
+        'E PAMUNDUR',
+        'E PAMUNDUR'
       ],
     };
   },
@@ -78,11 +118,12 @@ export default {
   methods: {
     onCheck() {
       try {
+
+        let alertMsg = [];
         if (this.$refs.testEditor._data.error || this.$refs.solutionEditor._data.error) {
           alert('Invalid JSON');
         } else {
           let idx = 0;
-          let alertMsg = [];
           this.solution.forEach(solution => {
             console.log('\nSolution' + (idx + 1));
             if (solution !== 'E PAMUNDUR') {
@@ -102,16 +143,16 @@ export default {
                   '\nC :', column_sums, '\nC :', this.test[idx]['C']);
 
               alertMsg.push(
-                  (idx + 1) + '. ' +
-                  (
-                      this.test[idx]['L'] === solution[0].reduce((a, b) => a + b, 0) &&
-                      this.test[idx]['P'] === solution[1].reduce((a, b) => a + b, 0) &&
-                      sums_match
-                  )
+                  (idx + 1) + '. ' + (
+                      (
+                          this.test[idx]['L'] === solution[0].reduce((a, b) => a + b, 0) &&
+                          this.test[idx]['P'] === solution[1].reduce((a, b) => a + b, 0) &&
+                          sums_match
+                      ) ? 'e sakte' : 'e gabuar')
               );
             } else {
-              console.log(solution);
-              alert((idx + 1) + '. ' + solution);
+              const txt = this.test[idx]['C'].reduce((a, b) => a + b, 0) === (this.test[idx]['L'] + this.test[idx]['P']);
+              alertMsg.push((idx + 1) + '. ' + (txt ? 'e gabuar' : 'e sakte'));
             }
             idx++;
           });
