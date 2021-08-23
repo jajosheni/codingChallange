@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="explanation">
-      <p>Krijo një repository në <a href="https://github.com/division5-dev">Division5 Github</a> me titullin <b><i>emer_mbiemer</i></b>.
+      <p>Krijo një repository në <a href="https://github.com/">Github</a>.
       </p>
       <p>Në momentin që ke përfunduar bëj <b>commit & push</b>.</p>
       <p>Pikët do të llogariten në bazë të <b>kohës</b>, <b>saktësisë</b> & <b>kompleksitetit të kohës (Big O)</b>.</p>
